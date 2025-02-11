@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+#define MAX_BLOCKS 10
+#define MAX_FILES 5
+
+void sequential_file_allocation(int files[MAX_FILES][2], int num_files) {
+    int block_start[MAX_FILES], block_end[MAX_FILES];
+
+    for (int i = 0; i < num_files; i++) {
+        block_start[i] = files[i][0];
+        block_end[i] = files[i][1];
+
+        printf("File %d: Blocks [%d, %d]\n", i + 1, block_start[i], block_end[i]);
+    }
+}
+
+int main() {
+    int files[MAX_FILES][2] = {
+        {0, 3}, // File 1 starts at block 0 and ends at block 3
+        {4, 6}, // File 2 starts at block 4 and ends at block 6
+        {7, 9}, // File 3 starts at block 7 and ends at block 9
+        {10, 12}, // File 4 starts at block 10 and ends at block 12
+        {13, 15}  // File 5 starts at block 13 and ends at block 15
+    };
+
+    sequential_file_allocation(files, MAX_FILES);
+
+    return 0;
+}
