@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void scan(int arr[], int n, int head, int disk_size) {
+    int total = 0;
+    int distance;
+    int left[MAX_REQUESTS], right[MAX_REQUESTS];
+    int left_count = 0, right_count = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] < head) {
+            left[left_count++] = arr[i];
+        } else {
+            right[right_count++] = arr[i];
+        }
+    }
+
+    // Sort the requests in both left and right arrays
+    for (int i = 0; i < left_count - 1; i++) {
+        for (int j = i + 1; j < left_count; j++) {
+            if (left[i] < left[j]) {
+                int temp = left[i];
+                left[i] = left[j];
+                left[j] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < right_count - 1; i++) {
+        for (int j = i + 1; j < right_count; j++) {
+            if (right[i] > right[j]) {
+                int temp = right[i];
+                right[i] = right[j];
+                right[j] = temp;
+            }
+        }
+    }
+
+    // Traverse to the left end
+    total += abs(head - left[0]);
+    head = left[0];
+
+    // Then move to the right end
+    total += abs(head - right[right_count - 1]);
+    head = right[right_count - 1];
+
+    printf("Total Seek Distance = %d\n", total);
+}
+
+int main() {
+    int requests[] = {98, 183, 41, 122, 14, 124, 65, 67};
+    int n = sizeof(requests) / sizeof(requests[0]);
+    int head = 53;
+    int disk_size = 200;
+
+    scan(requests, n, head, disk_size);
+    return 0;
+}
