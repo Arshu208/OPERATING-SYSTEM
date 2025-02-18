@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+#define MAX_DIRS 3
+#define MAX_FILES 5
+
+void createTwoLevelDirectory(char directories[MAX_DIRS][MAX_FILES][100], int dirs, int files) {
+    printf("Two Level Directory Structure:\n");
+    for (int i = 0; i < dirs; i++) {
+        printf("Directory %d:\n", i + 1);
+        for (int j = 0; j < files; j++) {
+            printf("\tFile %d: %s\n", j + 1, directories[i][j]);
+        }
+    }
+}
+
+int main() {
+    char directories[MAX_DIRS][MAX_FILES][100] = {
+        {"file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.txt"},
+        {"doc1.txt", "doc2.txt", "doc3.txt", "doc4.txt", "doc5.txt"},
+        {"image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg"}
+    };
+
+    createTwoLevelDirectory(directories, MAX_DIRS, MAX_FILES);
+    return 0;
+}
